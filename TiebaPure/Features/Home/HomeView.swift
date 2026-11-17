@@ -869,3 +869,19 @@ enum HomeSplitDetailBridgePolicy {
         }
     }
 }
+
+// MARK: - iOS 16.0 compat
+
+private extension View {
+    /// `scrollBounceBehavior(.always)` is iOS 16.4+. On earlier releases the
+    /// default bounce behavior applies: content shorter than the viewport may
+    /// not bounce, which this feed tolerates.
+    @ViewBuilder
+    func compatibleScrollBounceAlways() -> some View {
+        if #available(iOS 16.4, *) {
+            scrollBounceBehavior(.always, axes: .vertical)
+        } else {
+            self
+        }
+    }
+}
