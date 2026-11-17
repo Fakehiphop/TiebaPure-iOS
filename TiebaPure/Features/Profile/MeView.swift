@@ -172,7 +172,7 @@ struct MeView: View {
                         .navigationTitle("手机号验证码登录")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                            ToolbarItem(placement: .topBarLeading) {
+                            ToolbarItem(placement: .navigationBarLeading) {
                                 Button("关闭") {
                                     showsLogin = false
                                 }

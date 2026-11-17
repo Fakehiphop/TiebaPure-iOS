@@ -733,7 +733,7 @@ struct ThreadDetailView: View {
         ToolbarItem(placement: .principal) {
             forumToolbarTitle
         }
-        ToolbarItemGroup(placement: .topBarTrailing) {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
             favoriteToolbarButton
             searchToolbarButton
             moreToolbarMenu
@@ -2966,7 +2966,7 @@ private struct SubpostListSheet: View {
                 // of the sheet root for the middle-screen interactive return.
                 .interactiveNavigationPopRevealSource()
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         SubpostSheetDismissButton()
                     }
                 }

@@ -277,7 +277,7 @@ private struct ExternalRouteView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("关闭", action: onClose)
                         .accessibilityIdentifier("external-route-close")
                 }

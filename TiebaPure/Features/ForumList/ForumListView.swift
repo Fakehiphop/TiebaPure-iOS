@@ -125,7 +125,7 @@ struct ForumListView: View {
             self.selectedForum = nil
         }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
                     SettingsView(account: account)
                 } label: {

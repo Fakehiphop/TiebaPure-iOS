@@ -119,8 +119,8 @@ jobs:
             -derivedDataPath "$DERIVED_DATA" \
             build CODE_SIGNING_ALLOWED=NO
           APP="$DERIVED_DATA/Build/Products/Release-iphoneos/TiebaPure.app"
-          test "$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP/Info.plist")" = 16.4
-          test "$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP/PlugIns/TiebaPureOpenIn.appex/Info.plist")" = 16.4
+          test "$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP/Info.plist")" = 16.0
+          test "$(/usr/libexec/PlistBuddy -c 'Print :MinimumOSVersion' "$APP/PlugIns/TiebaPureOpenIn.appex/Info.plist")" = 16.0
           load_commands="$(otool -l "$APP/TiebaPure" | awk '/cmd LC_LOAD/{command=$2} /SwiftData.framework/{print command}' | sort -u)"
           test "$load_commands" = LC_LOAD_WEAK_DYLIB
           test -f "$APP/PrivacyInfo.xcprivacy"
@@ -130,3 +130,13 @@ jobs:
           test -f "$APP/SwiftProtobuf-Apache-2.0.txt"
           grep -Fq 'Apache License' "$APP/SwiftProtobuf-Apache-2.0.txt"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CADisableMinimumFrameDurationOnPhone' "$APP/Info.plist")" = true
+          rm -rf "$RUNNER_TEMP/payload" && mkdir -p "$RUNNER_TEMP/payload"
+          cp -R "$APP" "$RUNNER_TEMP/payload/"
+          (cd "$RUNNER_TEMP/payload" && zip -qry "$RUNNER_TEMP/TiebaPure_iOS16.ipa" .)
+          test -f "$RUNNER_TEMP/TiebaPure_iOS16.ipa"
+
+      - name: Upload unsigned ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TiebaPure_iOS16_unsigned_ipa
+          path: ${{ runner.temp }}/TiebaPure_iOS16.ipa

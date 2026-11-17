@@ -164,7 +164,7 @@ struct ForumThreadsView: View {
             threads.removeAll { TiebaContentFilter.shouldKeep(thread: $0) == false }
         }
         .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     if account != nil, forumMembership == nil {
                         Task { await loadForumMembership() }

@@ -98,7 +98,7 @@ struct HomeView: View {
         .navigationTitle("首页")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     activeSearch = SearchRoute(keyword: "")
                 } label: {
@@ -541,7 +541,7 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
         }
-        .scrollBounceBehavior(.always, axes: .vertical)
+        .compatibleScrollBounceAlways()
         .accessibilityIdentifier("home-feed-scroll-view")
         .shortPullRefresh(
             isEnabled: didLoad && isLoading == false,
